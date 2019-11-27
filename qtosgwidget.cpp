@@ -33,6 +33,7 @@
 #include <osgGA/EventQueue>
 #include <osgGA/TrackballManipulator>
 #include <libs.h>
+#include "KeyboardHandler.h"
 QtOSGWidget::QtOSGWidget(QWidget *parent)
 		: QOpenGLWidget(parent)
 		, _mGraphicsWindow(new osgViewer::GraphicsWindowEmbedded(this->x(), this->y(),
@@ -60,8 +61,13 @@ QtOSGWidget::QtOSGWidget(QWidget *parent)
 		manipulator->setAllowThrow(false);
 		this->setMouseTracking(true);
 		_mViewer->setCameraManipulator(manipulator);
+
+		//_mViewer->addEventHandler(new KeyboardHandler);//追加用户自定义的交互事件处理器，这里是键盘响应事件。这时就开始接受事件了。
+		//
 		_mViewer->setThreadingModel(osgViewer::Viewer::SingleThreaded);
 		_mViewer->realize();
+
+		this->setFocusPolicy(Qt::StrongFocus);
 	}
 QtOSGWidget::~QtOSGWidget() 
 {
@@ -142,14 +148,13 @@ void QtOSGWidget::wheelEvent(QWheelEvent *event)
 		this->getEventQueue()->mouseScroll(motion);
 }
 void QtOSGWidget::keyPressEvent(QKeyEvent *event)
-{
-
-
+{	 
+	this->getEventQueue()->keyPress((osgGA::GUIEventAdapter::KeySymbol)*(event->text().toLatin1().data()));
+	
 }
 void QtOSGWidget::keyReleaseEvent(QKeyEvent *event)
 {
-	 
-
+	this->getEventQueue()->keyRelease((osgGA::GUIEventAdapter::KeySymbol)*(event->text().toLatin1().data()));
 }
 bool QtOSGWidget::event(QEvent *event)
 {

@@ -30,11 +30,11 @@ int main(int argc, char **argv)
 #endif
 
 	QApplication qapp(argc, argv);
-	QMainWindow window;
-	QtOSGWidget *widget = new QtOSGWidget(&window);
-	window.setCentralWidget(widget);
-	window.setGeometry(100,100,500,600);
-	window.show();
+	//QMainWindow window;
+	QtOSGWidget widget;// = new QtOSGWidget(&window);
+	//window.setCentralWidget(widget);
+	widget.setGeometry(100, 100, 500, 600);
+	widget.show();
 
 	return qapp.exec();
 }

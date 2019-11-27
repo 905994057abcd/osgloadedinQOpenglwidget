@@ -38,8 +38,8 @@ protected:
 	virtual void mouseReleaseEvent(QMouseEvent *event); 
 	virtual void wheelEvent(QWheelEvent *event); 
 
-	virtual void keyPressEvent(QKeyEvent *);
-	virtual void keyReleaseEvent(QKeyEvent *);
+	virtual void keyPressEvent(QKeyEvent *event);
+	virtual void keyReleaseEvent(QKeyEvent *event);
 	/*virtual void focusInEvent(QFocusEvent *);
 	virtual void focusOutEvent(QFocusEvent *);
 	virtual void enterEvent(QEvent *);
